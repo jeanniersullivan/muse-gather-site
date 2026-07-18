@@ -7,6 +7,10 @@ module.exports = {
   instagram: "@jeanniesul",
   url: "https://museandgather.com",
 
+  // Flodesk form link — paste your form's shareable URL here (Flodesk → the
+  // form → Share → copy the Link / full-page URL). The signup buttons open it.
+  newsletterUrl: "https://museandgather.myflodesk.com/pen-pals",
+
   // Used by Person schema (JSON-LD) on every page.
   jobTitle: "Essayist & Writing Coach",
   // Add your other sites / profiles here — each becomes a verified link
