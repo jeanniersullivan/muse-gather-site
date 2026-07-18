@@ -1,0 +1,55 @@
+---
+layout: base.njk
+---
+<article class="wrap" style="padding:56px 28px 24px">
+  <a href="/essays/" style="font-size:14px;font-weight:600;color:var(--taupe)">← All essays</a>
+  <div class="eb coral" style="margin:24px 0 14px">{{ category or "Essay" }}</div>
+  <h1 style="font-size:56px">{{ title }}</h1>
+
+  <div style="display:flex;align-items:center;gap:16px;padding-bottom:24px;margin-bottom:32px;border-bottom:1px solid var(--taupe-faint)">
+    <div style="width:44px;height:44px;border-radius:var(--r-pill);background:var(--green-tint);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;color:var(--navy);font-size:20px">JS</div>
+    <div><div style="font-weight:600;color:var(--ink);font-size:15px"><a href="/about/" style="color:var(--ink)">{{ site.author }}</a></div><div style="font-size:13px;color:var(--taupe)">{{ date | readableDate }} · {{ content | readingTime }} min read</div></div>
+  </div>
+
+  {% if cover %}<img src="{{ cover }}" alt="" style="width:100%;border-radius:var(--r-lg);margin-bottom:32px">{% endif %}
+
+  <div class="article">
+    {% if summary %}<p class="lead">{{ summary }}</p>{% endif %}
+    {{ content | safe }}
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:44px;padding-top:24px;border-top:1px solid var(--taupe-faint)">
+    <div class="tagrow">{% for t in topics %}<a class="tag" href="/essays/">{{ t }}</a>{% endfor %}</div>
+    <div class="share"><span class="lbl">Share</span>
+      <a href="https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url | urlencode }}&text={{ title | urlencode }}" aria-label="Share on X"><i data-lucide="twitter"></i></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url | urlencode }}" aria-label="Share on Facebook"><i data-lucide="facebook"></i></a>
+      <a href="mailto:?subject={{ title | urlencode }}&body={{ site.url }}{{ page.url }}" aria-label="Share by email"><i data-lucide="mail"></i></a>
+    </div>
+  </div>
+</article>
+
+{%- set related = collections.essay | byDate | exclude(page.url) | limit(2) %}
+{%- if related.length %}
+<section class="wrap" style="padding:24px 28px 0">
+  <h2 style="font-size:28px;text-align:center;margin-bottom:24px">Keep reading</h2>
+  <div class="grid g2">
+    {%- for r in related %}
+    <a class="card" href="{{ r.url }}" style="text-decoration:none"><div class="eb coral" style="margin-bottom:10px">{{ r.data.category or "Essay" }}</div><h3 style="font-size:22px;margin:0 0 8px">{{ r.data.title }}</h3>{% if r.data.summary %}<p style="font-size:15px;color:var(--ink-soft);margin:0">{{ r.data.summary }}</p>{% endif %}</a>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
+<section class="wrap" style="padding:56px 28px 0">
+  <h2 style="font-size:24px;margin-bottom:16px">Join the conversation</h2>
+  <!-- COMMENTS: paste a lightweight comments embed here (Cusdis or Commento recommended). -->
+  <div style="background:var(--cream-raised);border:1px dashed var(--taupe-light);border-radius:var(--r-lg);padding:40px;text-align:center;color:var(--taupe)">Comments load here — connect a lightweight provider (Cusdis or Commento).</div>
+</section>
+
+<section style="background:var(--cream-deep);margin-top:72px;padding:56px 28px;text-align:center">
+  <div class="wrap"><span class="eb coral">The letter</span>
+    <h2 style="font-size:32px;margin:12px 0 8px">Never miss an essay</h2>
+    <p style="color:var(--taupe);margin-bottom:24px">The occasional piece, delivered when it's ready.</p>
+    {% include "signup.njk" %}
+  </div>
+</section>

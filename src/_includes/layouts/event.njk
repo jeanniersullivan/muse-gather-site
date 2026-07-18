@@ -1,0 +1,35 @@
+---
+layout: base.njk
+---
+<article class="wrap" style="padding:56px 28px 24px">
+  <a href="/events/" style="font-size:14px;font-weight:600;color:var(--taupe)">← All events</a>
+  <div style="display:flex;gap:10px;align-items:center;margin:24px 0 14px">{% if badge %}<span class="badge coral">{{ badge }}</span>{% endif %}{% if format %}<span class="badge navy">{{ format }}</span>{% endif %}</div>
+  <h1 style="font-size:52px">{{ title }}</h1>
+  <p style="font-size:19px;color:var(--taupe);margin-bottom:28px">{{ eventDate | readableDate }}{% if timeInfo %} · {{ timeInfo }}{% endif %} · {{ location }}</p>
+
+  {% if cover %}<img src="{{ cover }}" alt="" style="width:100%;border-radius:var(--r-lg);margin-bottom:32px">{% endif %}
+
+  <div class="article">{{ content | safe }}</div>
+
+  <div style="margin-top:32px;padding:28px;background:var(--cream-raised);border:1px solid var(--taupe-faint);border-radius:var(--r-lg);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <div><div style="font-weight:600;color:var(--ink);font-size:18px">{{ price or "Free" }}</div>{% if note %}<div style="font-size:14px;color:var(--taupe)">{{ note }}</div>{% endif %}</div>
+    <a class="btn btn-p btn-lg" href="{{ ticketUrl or '#' }}">{{ ctaLabel or 'Reserve a seat' }} →</a>
+  </div>
+  <!-- FLODESK: paste the checkout/booking embed for this event above, or point ticketUrl at your Flodesk link. -->
+</article>
+
+{%- set moreEvents = collections.event | upcoming | exclude(page.url) | limit(2) %}
+{%- if moreEvents.length %}
+<section class="wrap" style="padding:24px 28px 0">
+  <h2 style="font-size:28px;text-align:center;margin-bottom:24px">More gatherings</h2>
+  <div class="grid g2">
+    {%- for r in moreEvents %}
+    <a class="card" href="{{ r.url }}" style="text-decoration:none">{% if r.data.badge %}<div class="eb coral" style="margin-bottom:10px">{{ r.data.badge }}</div>{% endif %}<h3 style="font-size:22px;margin:0 0 8px">{{ r.data.title }}</h3><p style="font-size:15px;color:var(--ink-soft);margin:0">{{ r.data.eventDate | readableDate }} · {{ r.data.location }}</p></a>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
+<section class="wrap" style="padding:40px 28px 8px;text-align:center">
+  <p style="font-size:16px;color:var(--ink-soft)">While you're here — read the <a href="/essays/">essays</a> or learn <a href="/about/">who's behind muse + gather</a>.</p>
+</section>

@@ -1,0 +1,26 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+# {{ site.title }}
+
+> A personal blog and newsletter by {{ site.author }}.
+
+This is a personal blog/newsletter — reflections, creative projects, and things I've made and want to share. Updated irregularly. Not a business or sales site.
+
+muse + gather publishes unhurried essays and field notes on writing, attention, and living deliberately. Written and gathered by {{ site.author }}, {{ site.jobTitle | lower }}. The easiest way to follow along is the free email letter.
+
+## Pages
+- [Home]({{ site.url }}/): Introduction and recent writing.
+- [Essays]({{ site.url }}/essays/): Slow pieces on writing, attention, and living deliberately.
+- [Events]({{ site.url }}/events/): Occasional small workshops and gatherings, online and in person.
+- [Library]({{ site.url }}/library/): Books, tools, and things worth keeping.
+- [About]({{ site.url }}/about/): Who Jeannie is, coaching, contact, and FAQ.
+
+## Essays
+{%- for post in collections.essay | byDate %}
+- [{{ post.data.title }}]({{ site.url }}{{ post.url }}): {{ post.data.summary or "An essay." }}
+{%- endfor %}
+
+## Contact
+- Email: {{ site.email }}

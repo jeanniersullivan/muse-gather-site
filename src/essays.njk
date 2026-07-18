@@ -1,0 +1,22 @@
+---
+layout: base.njk
+title: Essays
+active: essays
+permalink: /essays/
+---
+<section class="wrap" style="text-align:center;padding:72px 28px 40px">
+  <div class="eb" style="margin-bottom:16px">The writing</div>
+  <h1 style="font-size:58px">Essays &amp; field notes</h1>
+  <p style="font-size:20px;color:var(--ink-soft);max-width:52ch;margin:0 auto">Slow pieces on writing, attention, and the ordinary business of living deliberately.</p>
+</section>
+
+<section class="wrap" style="padding:24px 28px 0">
+  {%- for post in collections.essay | byDate %}
+  <a class="post-row" href="{{ post.url }}"><div><div class="eb coral" style="margin-bottom:6px">{{ post.data.category or "Essay" }}</div><span class="t">{{ post.data.title }}</span>{% if post.data.summary %}<div class="m" style="margin-top:6px">{{ post.data.summary }}</div>{% endif %}</div><span class="d">{{ post.date | monthYear }} · {{ post.templateContent | readingTime }} min</span></a>
+  {%- endfor %}
+</section>
+
+<section class="wrap" style="text-align:center;padding:56px 28px 8px">
+  <p style="color:var(--taupe);font-size:15px">More is gathered every month.</p>
+  <a class="btn btn-s" href="/#">Subscribe for new essays →</a>
+</section>

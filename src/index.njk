@@ -1,0 +1,30 @@
+---
+layout: base.njk
+active: home
+---
+<section class="wrap" style="text-align:center;padding:96px 28px 72px;max-width:700px">
+  <h1 style="font-size:72px;line-height:1.02;margin-bottom:28px">You only get<br>one life.<br><em style="font-style:italic;color:var(--coral)">Make it true.</em></h1>
+  <p style="font-size:20px;line-height:1.7;color:var(--ink-soft);margin-bottom:36px">Unhurried essays on writing, attention, and living deliberately — from Jeannie Sullivan. Front porch, wildflowers, curiosity. Read along by email.</p>
+  {% include "signup.njk" %}
+  <div class="fine">Free · The occasional essay · Unsubscribe anytime</div>
+</section>
+
+<section class="wrap" style="padding:16px 28px 24px">
+  <div class="eb" style="text-align:center;margin-bottom:28px">Recent writing</div>
+  {%- for post in collections.essay | byDate | limit(4) %}
+  <a class="post-row" href="{{ post.url }}"><span class="t">{{ post.data.title }}</span><span class="d">{{ post.date | monthYear }}</span></a>
+  {%- endfor %}
+  <div style="text-align:center;margin-top:32px"><a class="btn btn-s" href="/essays/">Browse all essays →</a></div>
+</section>
+
+{%- set next = collections.event | upcoming | limit(1) %}
+{%- if next.length %}{% set e = next[0] %}
+<section style="background:var(--cream-deep);margin-top:72px;padding:56px 28px;text-align:center">
+  <div class="wrap">
+    <span class="eb coral">Next gathering</span>
+    <h2 style="font-size:34px;margin:12px 0 6px">{{ e.data.title }}</h2>
+    <p style="color:var(--taupe);margin-bottom:20px">{{ e.data.eventDate | readableDate }} · {{ e.data.location }}{% if e.data.price %} · {{ e.data.price }}{% endif %}</p>
+    <a class="btn btn-p" href="/events/">Reserve a seat →</a>
+  </div>
+</section>
+{%- endif %}

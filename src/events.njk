@@ -1,0 +1,45 @@
+---
+layout: base.njk
+title: Events
+active: events
+permalink: /events/
+---
+<section class="wrap" style="text-align:center;padding:72px 28px 40px">
+  <div class="eb" style="margin-bottom:16px">Come gather</div>
+  <h1 style="font-size:58px">Workshops &amp; gatherings</h1>
+  <p style="font-size:20px;color:var(--ink-soft);max-width:52ch;margin:0 auto">Small, unhurried rooms for writing and reading together — online and in person. Signups and payment run through Flodesk.</p>
+</section>
+
+<section class="wrap" style="padding:16px 28px 0">
+  <h2 style="font-size:30px;border-bottom:1px solid var(--taupe-faint);padding-bottom:14px;margin-bottom:28px">Upcoming</h2>
+  <div class="grid" style="gap:20px">
+  {%- for e in collections.event | upcoming %}
+    <div class="evt"><div class="date"><div class="n">{{ e.data.eventDate | day }}</div><div class="mo">{{ e.data.eventDate | monthAbbr }}</div></div><div style="flex:1">
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">{% if e.data.badge %}<span class="badge coral">{{ e.data.badge }}</span>{% endif %}{% if e.data.format %}<span class="badge navy">{{ e.data.format }}</span>{% endif %}</div>
+      <h3>{{ e.data.title }}</h3><div class="meta">{{ e.data.eventDate | readableDate }}{% if e.data.timeInfo %} · {{ e.data.timeInfo }}{% endif %} · {{ e.data.location }}</div>
+      {% if e.data.summary %}<p style="margin:0 0 16px;font-size:15px">{{ e.data.summary }}</p>{% endif %}
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><a class="btn btn-p btn-sm" href="{{ e.data.ticketUrl or '#' }}">{{ e.data.ctaLabel or 'Reserve' }}{% if e.data.price %} · {{ e.data.price }}{% endif %}</a>{% if e.data.note %}<span style="font-size:13px;color:var(--taupe)">{{ e.data.note }}</span>{% endif %}</div>
+    </div></div>
+  {%- else %}
+    <p style="color:var(--taupe)">No gatherings on the calendar just now — subscribe below to hear when the next one opens.</p>
+  {%- endfor %}
+  </div>
+</section>
+
+{%- set pastEvents = collections.event | past %}
+{%- if pastEvents.length %}
+<section class="wrap" style="padding:56px 28px 0">
+  <h2 style="font-size:30px;border-bottom:1px solid var(--taupe-faint);padding-bottom:14px;margin-bottom:28px">Past gatherings</h2>
+  {%- for e in pastEvents %}
+  <div class="post-row"><div><span class="t">{{ e.data.title }}</span>{% if e.data.summary %}<div class="m" style="margin-top:6px">{{ e.data.summary }}</div>{% endif %}</div><span class="d">{{ e.data.eventDate | monthYear }}</span></div>
+  {%- endfor %}
+</section>
+{%- endif %}
+
+<section style="background:var(--cream-deep);margin-top:72px;padding:56px 28px;text-align:center">
+  <div class="wrap"><span class="eb coral">Never miss a gathering</span>
+    <h2 style="font-size:32px;margin:12px 0 8px">Hear about events first</h2>
+    <p style="color:var(--taupe);margin-bottom:24px">Subscribers get the invitation before seats open to everyone.</p>
+    {% include "signup.njk" %}
+  </div>
+</section>

@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+{# --- Unique, descriptive title + description on every page/post --- #}
+{%- set metaTitle = (title + " — " + site.title) if title else (site.title + " — " + site.author) %}
+{%- set metaDesc = description or summary or site.description %}
+{%- set canonical = site.url + page.url %}
+<title>{{ metaTitle }}</title>
+<meta name="description" content="{{ metaDesc }}">
+<link rel="canonical" href="{{ canonical }}">
+{# --- Open Graph / social + AI preview --- #}
+<meta property="og:type" content="{{ 'article' if isEssay else 'website' }}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{{ metaTitle }}">
+<meta property="og:description" content="{{ metaDesc }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/favicon.svg">
+<script src="https://unpkg.com/lucide@latest"></script>
+{# --- Person schema: who runs this site, on every page --- #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": {{ site.author | dump | safe }},
+  "jobTitle": {{ site.jobTitle | dump | safe }},
+  "url": {{ site.url | dump | safe }},
+  "email": {{ ("mailto:" + site.email) | dump | safe }},
+  "description": {{ site.description | dump | safe }},
+  "knowsAbout": {{ site.knowsAbout | dump | safe }},
+  "sameAs": {{ site.sameAs | dump | safe }}
+}
+</script>
+{%- if isEssay %}
+{# --- BlogPosting schema: automatic on every essay --- #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ title | dump | safe }},
+  "description": {{ metaDesc | dump | safe }},
+  "datePublished": "{{ page.date | isoDate }}",
+  "dateModified": "{{ page.date | isoDate }}",
+  "url": {{ canonical | dump | safe }},
+  "mainEntityOfPage": {{ canonical | dump | safe }},
+  "keywords": {{ (topics or []) | dump | safe }},
+  "articleSection": {{ (category or "Essay") | dump | safe }},
+  "author": { "@type": "Person", "name": {{ site.author | dump | safe }}, "url": {{ site.url | dump | safe }} },
+  "publisher": { "@type": "Person", "name": {{ site.author | dump | safe }} }
+}
+</script>
+{%- endif %}
+{%- if isEvent %}
+{# --- Event schema: automatic on every event --- #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": {{ title | dump | safe }},
+  "description": {{ metaDesc | dump | safe }},
+  "startDate": "{{ eventDate | isoDate }}",
+  "eventAttendanceMode": "{{ 'https://schema.org/OnlineEventAttendanceMode' if format == 'Online' else 'https://schema.org/OfflineEventAttendanceMode' }}",
+  "location": {{ location | dump | safe }},
+  "url": {{ canonical | dump | safe }},
+  "organizer": { "@type": "Person", "name": {{ site.author | dump | safe }}, "url": {{ site.url | dump | safe }} }
+}
+</script>
+{%- endif %}
+</head>
+<body>
+<header class="site-nav"><a class="wm" href="/">muse <span class="p">+</span> gather</a><nav class="nav-links">
+{%- for item in site.nav %}<a href="{{ item.url }}"{% if item.key == active %} class="on"{% endif %}>{{ item.text }}</a>{% endfor -%}
+</nav></header>
+
+<main>
+{{ content | safe }}
+</main>
+
+<footer class="site-footer"><div class="wide"><div class="foot-grid">
+  <div><a class="wm" href="/">muse <span class="p">+</span> gather</a><p style="margin-top:14px;max-width:34ch">Unhurried essays on writing, attention, and living deliberately. You only get one life. Make it true.</p></div>
+  <div><h4>Explore</h4><ul class="foot-links"><li><a href="/essays/">Essays</a></li><li><a href="/events/">Events</a></li><li><a href="/library/">Library</a></li><li><a href="/about/">About &amp; contact</a></li></ul></div>
+  <div><h4>Stay in touch</h4><ul class="foot-links"><li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li><li><a href="https://instagram.com/jeanniesul">Instagram</a></li><li><a href="/about/#contact">The letter (Flodesk)</a></li></ul></div>
+</div><div class="foot-bottom"><span>© 2026 {{ site.author }} · muse + gather</span><span>museandgather.com</span></div></div></footer>
+<script>lucide.createIcons();</script>
+<!-- Netlify Identity: lets the /admin login + email invites work -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>if(window.netlifyIdentity){window.netlifyIdentity.on("init",function(u){if(!u){window.netlifyIdentity.on("login",function(){document.location.href="/admin/";});}});}</script>
+</body></html>

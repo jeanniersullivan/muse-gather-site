@@ -1,0 +1,94 @@
+---
+layout: base.njk
+title: About
+active: about
+permalink: /about/
+---
+<section class="wrap" style="padding:72px 28px 32px">
+  <div class="eb" style="margin-bottom:16px">About</div>
+  <h1 style="font-size:58px">Hello, I'm Jeannie.</h1>
+  <p style="font-size:22px;line-height:1.5;color:var(--ink);max-width:56ch">I write unhurried essays about writing, attention, and the ordinary business of living deliberately — published here under <em style="font-style:italic;color:var(--coral)">muse + gather</em>.</p>
+</section>
+
+<section class="wrap" style="padding:0 28px 40px">
+  <img src="/assets/jeannie.jpg" alt="Jeannie Sullivan" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center 30%;border-radius:var(--r-xl);border:1px solid var(--taupe-faint)">
+</section>
+
+<section class="wrap" style="padding:0 28px">
+  <div class="article">
+    <p>For years I mistook busyness for a life. This site is my correction — a place to think out loud, slowly, and to gather the things worth keeping: a sentence, a season, a way of paying attention.</p>
+    <p>The name comes from two habits. <strong style="color:var(--ink)">Muse</strong>, because most of what I believe arrives sideways, while I'm doing something else. <strong style="color:var(--ink)">Gather</strong>, because the work is mostly collecting — noticing, saving, arranging until it means something.</p>
+  </div>
+  <div class="tagrow" style="margin:28px 0 8px"><span class="badge coral">Essayist</span><span class="badge green">Writing coach</span><span class="badge navy">Slow-blog advocate</span></div>
+</section>
+
+<section class="wrap" style="padding:56px 28px 0">
+  <div class="card" style="padding:40px">
+    <div class="eb coral" style="margin-bottom:12px">Work with me</div>
+    <h2 style="font-size:34px;margin-bottom:12px">Coaching for writers</h2>
+    <p style="font-size:18px;color:var(--ink-soft);margin-bottom:20px">I work with a small number of writers each season — on essays, on finishing the book, and on building a practice that lasts. Warm, honest, unhurried. We meet where you are.</p>
+    <ul style="list-style:none;padding:0;margin:0 0 24px;display:grid;gap:12px">
+      <li style="display:flex;gap:12px;align-items:flex-start"><i data-lucide="check" style="color:var(--coral);flex:none;margin-top:3px"></i><span>Single sessions for a specific piece or a stuck moment</span></li>
+      <li style="display:flex;gap:12px;align-items:flex-start"><i data-lucide="check" style="color:var(--coral);flex:none;margin-top:3px"></i><span>Seasonal packages for ongoing work on a manuscript</span></li>
+      <li style="display:flex;gap:12px;align-items:flex-start"><i data-lucide="check" style="color:var(--coral);flex:none;margin-top:3px"></i><span>Manuscript reads with detailed, kind feedback</span></li>
+    </ul>
+    <a class="btn btn-p btn-lg" href="#contact">Enquire about coaching →</a>
+  </div>
+</section>
+
+<section id="contact" class="wrap" style="padding:64px 28px 0">
+  <div class="eb" style="margin-bottom:12px">Contact</div>
+  <h2 style="font-size:38px;margin-bottom:14px">Say hello</h2>
+  <p style="font-size:18px;color:var(--ink-soft);max-width:52ch;margin-bottom:28px">For coaching enquiries, event questions, or just to share a sentence that stopped you — I'd love to hear from you.</p>
+  <div class="grid g2" style="gap:20px">
+    <a class="card" href="mailto:{{ site.email }}" style="text-decoration:none;display:flex;gap:16px;align-items:center"><i data-lucide="mail" style="color:var(--coral)"></i><div><div style="font-weight:600;color:var(--ink)">Email</div><div style="font-size:15px;color:var(--taupe)">{{ site.email }}</div></div></a>
+    <a class="card" href="https://instagram.com/jeanniesul" style="text-decoration:none;display:flex;gap:16px;align-items:center"><i data-lucide="instagram" style="color:var(--coral)"></i><div><div style="font-weight:600;color:var(--ink)">Instagram</div><div style="font-size:15px;color:var(--taupe)">{{ site.instagram }}</div></div></a>
+  </div>
+
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-top:28px;display:grid;gap:16px;max-width:560px">
+    <input type="hidden" name="form-name" value="contact">
+    <p hidden><label>Leave blank: <input name="bot-field"></label></p>
+    <div style="display:grid;gap:6px"><label style="font-size:15px;font-weight:600;color:var(--ink)">Your name</label><input name="name" required style="font-family:var(--font-body);font-size:16px;padding:12px 15px;border-radius:var(--r-md);border:1px solid var(--taupe-light);background:var(--cream-raised);outline:none"></div>
+    <div style="display:grid;gap:6px"><label style="font-size:15px;font-weight:600;color:var(--ink)">Email</label><input name="email" type="email" required style="font-family:var(--font-body);font-size:16px;padding:12px 15px;border-radius:var(--r-md);border:1px solid var(--taupe-light);background:var(--cream-raised);outline:none"></div>
+    <div style="display:grid;gap:6px"><label style="font-size:15px;font-weight:600;color:var(--ink)">Your note</label><textarea name="message" rows="4" style="font-family:var(--font-body);font-size:16px;padding:12px 15px;border-radius:var(--r-md);border:1px solid var(--taupe-light);background:var(--cream-raised);outline:none;resize:vertical"></textarea></div>
+    <div><button class="btn btn-p" type="submit">Send note</button></div>
+  </form>
+</section>
+
+<section class="wrap" style="padding:64px 28px 0">
+  <div class="eb" style="margin-bottom:12px">Good to know</div>
+  <h2 style="font-size:38px;margin-bottom:8px">Common questions</h2>
+  <p style="font-size:17px;color:var(--taupe);max-width:52ch;margin-bottom:28px">A plain-language sense of what this place is — and isn't.</p>
+  <dl style="display:grid;gap:24px;max-width:64ch;margin:0">
+    {%- for item in site.faq %}
+    <div>
+      <dt style="font-family:var(--font-display);font-size:23px;font-weight:600;color:var(--ink);margin-bottom:6px">{{ item.q }}</dt>
+      <dd style="margin:0;font-size:17px;line-height:1.7;color:var(--ink-soft)">{{ item.a }}</dd>
+    </div>
+    {%- endfor %}
+  </dl>
+  <p style="font-size:16px;color:var(--ink-soft);margin-top:24px">Start with the <a href="/essays/">essays</a>, see what's <a href="/events/">coming up</a>, or browse the <a href="/library/">library</a>.</p>
+</section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for item in site.faq %}
+    {
+      "@type": "Question",
+      "name": {{ item.q | dump | safe }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ item.a | dump | safe }} }
+    }{{ "," if not loop.last }}
+    {%- endfor %}
+  ]
+}
+</script>
+
+<section style="background:var(--cream-deep);margin-top:72px;padding:56px 28px;text-align:center">
+  <div class="wrap"><span class="eb coral">The letter</span>
+    <h2 style="font-size:32px;margin:12px 0 8px">Read along by email</h2>
+    <p style="color:var(--taupe);margin-bottom:24px">The occasional essay, delivered when it's ready.</p>
+    {% include "signup.njk" %}
+  </div>
+</section>

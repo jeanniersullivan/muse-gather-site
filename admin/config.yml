@@ -1,0 +1,55 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded images are stored / linked from
+media_folder: "src/assets/uploads"
+public_folder: "/assets/uploads"
+
+# Show a "Publishing" workflow (draft → in review → published)
+publish_mode: editorial_workflow
+
+site_url: https://jeanniesullivan.com
+display_url: https://jeanniesullivan.com
+logo_url: https://jeanniesullivan.com/assets/uploads/logo.png
+
+collections:
+  - name: essays
+    label: Essays
+    label_singular: Essay
+    folder: "src/essays"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}  —  {{date | date('MMM D, YYYY')}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Category, name: category, widget: select, options: ["Essay", "Field notes", "Letter"], default: "Essay" }
+      - { label: "Publish date", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+      - { label: "Summary (shown in lists & as the opening line)", name: summary, widget: text, required: false }
+      - { label: Topics, name: topics, widget: list, required: false, hint: "Tags shown at the bottom of the essay, e.g. writing, attention" }
+      - { label: "Cover image", name: cover, widget: image, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: events
+    label: Events
+    label_singular: Event
+    folder: "src/events"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}  —  {{eventDate | date('MMM D, YYYY')}}"
+    sortable_fields: [eventDate, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: "Event date", name: eventDate, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+      - { label: "Time (free text)", name: timeInfo, widget: string, required: false, hint: "e.g. 10am–11:30am PT · 90 minutes" }
+      - { label: Location, name: location, widget: string, hint: "e.g. Online, or Hudson, NY" }
+      - { label: Format, name: format, widget: select, options: ["Online", "In person", "Hybrid"], required: false }
+      - { label: Type, name: badge, widget: select, options: ["Workshop", "Book club", "Retreat", "Reading", "Talk", "Circle"], required: false }
+      - { label: Price, name: price, widget: string, required: false, hint: "e.g. $45, Free, or Deposit $250" }
+      - { label: "Button label", name: ctaLabel, widget: string, required: false, default: "Reserve" }
+      - { label: "Ticket / booking link (Flodesk)", name: ticketUrl, widget: string, required: false, hint: "Paste your Flodesk checkout or signup link" }
+      - { label: "Small note", name: note, widget: string, required: false, hint: "e.g. 8 seats left" }
+      - { label: "Summary (shown in lists)", name: summary, widget: text, required: false }
+      - { label: "Cover image", name: cover, widget: image, required: false }
+      - { label: Details, name: body, widget: markdown, required: false }
