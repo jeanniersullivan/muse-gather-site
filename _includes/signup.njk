@@ -1,0 +1,5 @@
+{# Newsletter signup — opens the Flodesk form in a new tab so the page keeps
+   its own design. Set the link once in src/_data/site.js (newsletterUrl). #}
+<div style="text-align:center">
+  <a class="btn btn-p btn-lg" href="{{ site.newsletterUrl }}"{% if site.newsletterUrl != '#' %} target="_blank" rel="noopener"{% endif %}>Join the letter →</a>
+</div>

@@ -56,10 +56,6 @@ main{flex:1}
 .signup input{flex:1;min-width:220px;font-family:var(--font-body);font-size:17px;padding:14px 20px;border-radius:var(--r-pill);border:1px solid var(--taupe-light);outline:none;background:var(--cream-raised);color:var(--ink)}
 .signup input:focus{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-tint)}
 .fine{font-size:13px;color:var(--taupe);margin-top:14px;text-align:center}
-/* Flodesk: hide the empty spacer block Flodesk injects above the fields */
-[id^="fd-form-"] .fd-form-container>div:first-child:empty,
-[id^="fd-form-"] .fd-form-content>div:first-child:empty{display:none!important;margin-top:0!important;padding-top:0!important}
-[id^="fd-form-"] .fd-form-content>div:first-child{margin-top:0!important;padding-top:0!important}
 
 /* post list rows */
 .post-row{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:22px 0;border-top:1px solid var(--taupe-faint)}
