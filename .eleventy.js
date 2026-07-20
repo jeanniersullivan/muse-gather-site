@@ -32,6 +32,9 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("byDate", (items) =>
     [...(items || [])].sort((a, b) => new Date(b.date) - new Date(a.date)));
+  eleventyConfig.addFilter("whereType", (items, type) =>
+    (items || []).filter((i) => i.data.type === type)
+      .sort((a, b) => ((a.data.order ?? 999) - (b.data.order ?? 999)) || String(a.data.title).localeCompare(String(b.data.title))));
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
   eleventyConfig.addFilter("exclude", (arr, url) => (arr || []).filter((i) => i.url !== url));
 
