@@ -1,0 +1,32 @@
+---
+layout: base.njk
+---
+{%- set isFree = access == "Free" %}
+{%- set isSoon = access == "Coming soon" %}
+{%- set buyLink = ticketUrl or externalUrl %}
+<article class="wrap" style="padding:56px 28px 24px">
+  <a href="/collection/" style="font-size:14px;font-weight:600;color:var(--taupe)">← All of the collection</a>
+  <div style="display:flex;gap:10px;align-items:center;margin:24px 0 14px">{% if badge or type %}<span class="badge {% if isFree %}green{% elif isSoon %}navy{% else %}coral{% endif %}">{{ badge or type }}</span>{% endif %}</div>
+  <h1 style="font-size:52px">{{ title }}</h1>
+  {% if summary %}<p style="font-size:19px;color:var(--taupe);margin-bottom:28px">{{ summary }}</p>{% endif %}
+
+  {% if cover %}<img src="{{ cover }}" alt="{{ title }}" style="width:100%;max-width:420px;border-radius:var(--r-lg);margin-bottom:32px">{% endif %}
+
+  {% if content %}<div class="article">{{ content | safe }}</div>{% endif %}
+
+  <div style="margin-top:32px;padding:28px;background:var(--cream-raised);border:1px solid var(--taupe-faint);border-radius:var(--r-lg);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+    <div><div style="font-weight:600;color:var(--ink);font-size:18px">{% if isSoon %}Coming soon{% elif isFree %}Free{% else %}{{ price or "For sale" }}{% endif %}</div>{% if note %}<div style="font-size:14px;color:var(--taupe)">{{ note }}</div>{% endif %}</div>
+    {% if isSoon %}
+    <a class="btn btn-s btn-lg" href="{{ buyLink or site.newsletterUrl }}">{{ ctaLabel or "Get notified" }} →</a>
+    {% elif isFree %}
+    <a class="btn btn-s btn-lg" href="{{ buyLink or site.newsletterUrl }}">{{ ctaLabel or "Get it free" }} →</a>
+    {% else %}
+    <a class="btn btn-p btn-lg" href="{{ buyLink or '#' }}">{{ ctaLabel or "Buy" }}{% if price %} · {{ price }}{% endif %} →</a>
+    {% endif %}
+  </div>
+  <!-- FLODESK: for paid items, paste your Flodesk checkout link in the "Flodesk checkout / signup link" field. For free items, a Flodesk signup link there will collect the email and deliver the download. -->
+</article>
+
+<section class="wrap" style="padding:40px 28px 8px;text-align:center">
+  <p style="font-size:16px;color:var(--ink-soft)">Browse the rest of the <a href="/collection/">collection</a>, read the <a href="/essays/">essays</a>, or see <a href="/about/">who's behind muse + gather</a>.</p>
+</section>

@@ -67,6 +67,30 @@
 }
 </script>
 {%- endif %}
+{%- if isCollectionItem %}
+{# --- Product schema: automatic on every collection item --- #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ title | dump | safe }},
+  "description": {{ metaDesc | dump | safe }},
+  "url": {{ canonical | dump | safe }},
+  {%- if cover %}"image": {{ cover | dump | safe }},{%- endif %}
+  "category": {{ (type or "Other") | dump | safe }},
+  "brand": { "@type": "Brand", "name": {{ site.title | dump | safe }} }
+  {%- if access != "Coming soon" %},
+  "offers": {
+    "@type": "Offer",
+    "price": "{{ price | replace('$','') if price else '0' }}",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": {{ (ticketUrl or externalUrl or canonical) | dump | safe }}
+  }
+  {%- endif %}
+}
+</script>
+{%- endif %}
 </head>
 <body>
 <header class="site-nav"><a class="wm" href="/">muse <span class="p">+</span> gather</a><nav class="nav-links">
@@ -79,7 +103,7 @@
 
 <footer class="site-footer"><div class="wide"><div class="foot-grid">
   <div><a class="wm" href="/">muse <span class="p">+</span> gather</a><p style="margin-top:14px;max-width:34ch">Unhurried essays on writing, attention, and living deliberately. You only get one life. Make it true.</p></div>
-  <div><h4>Explore</h4><ul class="foot-links"><li><a href="/essays/">Essays</a></li><li><a href="/events/">Events</a></li><li><a href="/library/">Library</a></li><li><a href="/about/">About &amp; contact</a></li></ul></div>
+  <div><h4>Explore</h4><ul class="foot-links"><li><a href="/essays/">Essays</a></li><li><a href="/events/">Events</a></li><li><a href="/collection/">Collection</a></li><li><a href="/about/">About &amp; contact</a></li></ul></div>
   <div><h4>Stay in touch</h4><ul class="foot-links"><li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li><li><a href="https://instagram.com/jeanniesul">Instagram</a></li><li><a href="/about/#contact">The letter (Flodesk)</a></li></ul></div>
 </div><div class="foot-bottom"><span>© 2026 {{ site.author }} · muse + gather</span><span>museandgather.com</span></div></div></footer>
 <script>lucide.createIcons();</script>

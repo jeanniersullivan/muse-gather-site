@@ -1,0 +1,63 @@
+---
+layout: base.njk
+title: Collection
+active: collection
+permalink: /collection/
+description: Books, journals, courses, and free downloads by Jeannie Sullivan — everything made and gathered at muse + gather, in one place.
+---
+<section class="wrap" style="text-align:center;padding:72px 28px 40px">
+  <div class="eb" style="margin-bottom:16px">The collection</div>
+  <h1 style="font-size:58px">Gathered &amp; made</h1>
+  <p style="font-size:20px;color:var(--ink-soft);max-width:54ch;margin:0 auto">Books, journals, courses, and free downloads — some for sale, some my gift to you, all made or gathered in one calm room.</p>
+</section>
+
+{%- set groups = [
+  { type: "Book", label: "Books" },
+  { type: "Guide", label: "Guides &amp; journals" },
+  { type: "Course", label: "Courses" },
+  { type: "Download", label: "Free downloads" },
+  { type: "Audio", label: "Listen" },
+  { type: "Other", label: "More" }
+] %}
+{%- for g in groups %}
+{%- set items = collections.collectionItem | whereType(g.type) %}
+{%- if items.length %}
+<section class="wide" style="padding:24px 28px 32px">
+  <h2 style="font-size:30px;border-bottom:1px solid var(--taupe-faint);padding-bottom:14px;margin-bottom:28px">{{ g.label | safe }}</h2>
+  <div class="grid g3">
+  {%- for item in items %}
+    {%- set isFree = item.data.access == "Free" %}
+    {%- set isSoon = item.data.access == "Coming soon" %}
+    {%- set buyLink = item.data.ticketUrl or item.data.externalUrl %}
+    <div class="card">
+      {% if item.data.cover %}<div style="aspect-ratio:3/4;border-radius:var(--r-md);margin-bottom:18px;overflow:hidden"><img src="{{ item.data.cover }}" alt="{{ item.data.title }}" style="width:100%;height:100%;object-fit:cover"></div>{% else %}<div style="aspect-ratio:3/4;background:linear-gradient(135deg,var(--green-tint),var(--cream-deep));border-radius:var(--r-md);margin-bottom:18px;display:flex;align-items:center;justify-content:center;color:var(--taupe);font-size:13px">[ cover ]</div>{% endif %}
+      <span class="badge {% if isFree %}green{% elif isSoon %}navy{% else %}coral{% endif %}" style="margin-bottom:10px">{{ item.data.badge or item.data.type }}</span>
+      <h3 style="font-size:23px;margin:8px 0 6px"><a href="{{ item.url }}" style="color:inherit;text-decoration:none">{{ item.data.title }}</a></h3>
+      {% if item.data.summary %}<p style="font-size:15px;color:var(--ink-soft);margin:0 0 16px">{{ item.data.summary }}</p>{% endif %}
+      {% if isSoon %}
+      <a class="btn btn-s btn-sm" href="{{ buyLink or site.newsletterUrl }}">{{ item.data.ctaLabel or "Get notified" }} →</a>
+      {% elif isFree %}
+      <a class="btn btn-s btn-sm" href="{{ buyLink or site.newsletterUrl }}">{{ item.data.ctaLabel or "Get it free" }} →</a>
+      {% else %}
+      <a class="btn btn-p btn-sm" href="{{ buyLink or item.url }}">{{ item.data.ctaLabel or "Buy" }}{% if item.data.price %} · {{ item.data.price }}{% endif %}</a>
+      {% endif %}
+    </div>
+  {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+{%- endfor %}
+
+{%- if not collections.collectionItem.length %}
+<section class="wrap" style="text-align:center;padding:8px 28px 40px">
+  <p style="color:var(--taupe)">The collection is being gathered — subscribe below and I'll tell you the moment there's something to share.</p>
+</section>
+{%- endif %}
+
+<section style="background:var(--cream-deep);margin-top:56px;padding:56px 28px;text-align:center">
+  <div class="wrap"><span class="eb coral">The letter</span>
+    <h2 style="font-size:32px;margin:12px 0 8px">New books &amp; courses, in your inbox</h2>
+    <p style="color:var(--taupe);margin-bottom:24px">Subscribers hear first, and often get a discount.</p>
+    {% include "signup.njk" %}
+  </div>
+</section>

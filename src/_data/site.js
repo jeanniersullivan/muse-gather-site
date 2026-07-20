@@ -42,7 +42,7 @@ module.exports = {
   nav: [
     { text: "Essays", url: "/essays/", key: "essays" },
     { text: "Events", url: "/events/", key: "events" },
-    { text: "Library", url: "/library/", key: "library" },
+    { text: "Collection", url: "/collection/", key: "collection" },
     { text: "About", url: "/about/", key: "about" },
   ],
 };

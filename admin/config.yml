@@ -9,9 +9,9 @@ public_folder: "/assets/uploads"
 # Show a "Publishing" workflow (draft → in review → published)
 publish_mode: editorial_workflow
 
-site_url: https://jeanniesullivan.com
-display_url: https://jeanniesullivan.com
-logo_url: https://jeanniesullivan.com/assets/uploads/logo.png
+site_url: https://museandgather.com
+display_url: https://museandgather.com
+logo_url: https://museandgather.com/assets/uploads/logo.png
 
 collections:
   - name: essays
@@ -52,4 +52,26 @@ collections:
       - { label: "Small note", name: note, widget: string, required: false, hint: "e.g. 8 seats left" }
       - { label: "Summary (shown in lists)", name: summary, widget: text, required: false }
       - { label: "Cover image", name: cover, widget: image, required: false }
-      - { label: Details, name: body, widget: markdown, required: false }
+      - { label: "Details", name: body, widget: markdown, required: false }
+
+  - name: collection
+    label: Collection
+    label_singular: Collection item
+    folder: "src/collection"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}  —  {{access}}"
+    sortable_fields: [title, type, order]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Type, name: type, widget: select, options: ["Book", "Guide", "Course", "Download", "Audio", "Other"], default: "Book", hint: "Groups the item on the Collection page (Books, Guides & journals, Courses, Free downloads, Listen, More)" }
+      - { label: Access, name: access, widget: select, options: ["For sale", "Free", "Coming soon"], default: "For sale", hint: "For sale = shows a Buy button with the price · Free = shows a Get-it-free button · Coming soon = shows Get notified" }
+      - { label: "Price", name: price, widget: string, required: false, hint: "Only for items For sale, e.g. $18 or $120" }
+      - { label: "Flodesk checkout / signup link", name: ticketUrl, widget: string, required: false, hint: "PAID: paste your Flodesk checkout link. FREE: paste a Flodesk signup link to collect the email and deliver the download. Leave blank to send people to your newsletter form." }
+      - { label: "External buy link (optional)", name: externalUrl, widget: string, required: false, hint: "Use instead of Flodesk if the item is sold somewhere else, e.g. an Amazon or bookshop link" }
+      - { label: "Button label", name: ctaLabel, widget: string, required: false, hint: "e.g. Buy the book, Enroll, Get it free, Join the waitlist. Leave blank for a sensible default." }
+      - { label: "Badge (short label)", name: badge, widget: string, required: false, hint: "Small tag on the card, e.g. Essay collection, Self-paced, PDF. Defaults to the Type." }
+      - { label: "Sort order", name: order, widget: number, required: false, default: 1, value_type: int, hint: "Lower numbers show first within the group" }
+      - { label: "Summary (shown on the card)", name: summary, widget: text, required: false }
+      - { label: "Cover image", name: cover, widget: image, required: false }
+      - { label: "Details", name: body, widget: markdown, required: false, hint: "The longer description shown on the item's own page" }
