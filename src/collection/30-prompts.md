@@ -2,7 +2,7 @@
 title: 30 prompts for paying attention
 type: Download
 access: Free
-ticketUrl: ""
+ticketUrl: https://museandgather.myflodesk.com/30-prompts
 ctaLabel: Get it free
 badge: PDF
 order: 2
